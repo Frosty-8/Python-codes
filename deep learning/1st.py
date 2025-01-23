@@ -1,4 +1,4 @@
-import tensorflow as tf
+import tensorflow 
 from tensorflow.keras.models import Sequential #type:ignore
 from tensorflow.keras.layers import Dense #type:ignore
 from sklearn.datasets import make_classification
@@ -49,13 +49,3 @@ print(f"Test Accuracy: {test_accuracy * 100:.2f}%")
 predictions = (model.predict(X_test) > 0.5).astype("int32")
 accuracy = accuracy_score(y_test, predictions)
 print(f"Accuracy Score: {accuracy * 100:.2f}%")
-
-import matplotlib.pyplot as plt
-plt.figure(figsize=(12, 6))
-plt.plot(history.history['accuracy'], label='Train Accuracy')
-plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
-plt.title('Model Accuracy')
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy')
-plt.legend()
-plt.show()
