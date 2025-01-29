@@ -1,3 +1,7 @@
+"""
+Building a CNN Model to Classify Images from Popular Datasets (MNIST, CIFAR-10, ImageNet)
+"""
+
 import tensorflow as tf #type:ignore
 from tensorflow.keras.models import Sequential #type:ignore
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout #type:ignore

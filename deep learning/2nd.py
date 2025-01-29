@@ -1,3 +1,7 @@
+""" 
+Deep Neural Networks (OCR Letter Recognition Dataset)
+"""
+
 import tensorflow as tf
 from tensorflow.keras.models import Sequential# type: ignore 
 from tensorflow.keras.layers import Dense, Dropout#type:ignore

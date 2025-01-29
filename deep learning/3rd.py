@@ -1,3 +1,7 @@
+"""
+Deep Neural Networks on Text Data (IMDB Dataset)
+"""
+
 import tensorflow as tf
 from tensorflow.keras.models import Sequential #type:ignore
 from tensorflow.keras.layers import Dense, Embedding, LSTM, Bidirectional, Dropout #type:ignore

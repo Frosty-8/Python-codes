@@ -1,3 +1,7 @@
+""" 
+Feedforward Neural Network using tensorflow and keras
+"""
+
 import tensorflow 
 from tensorflow.keras.models import Sequential #type:ignore
 from tensorflow.keras.layers import Dense #type:ignore
