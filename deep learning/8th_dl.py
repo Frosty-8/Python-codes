@@ -7,15 +7,12 @@ from tensorflow.keras.layers import LSTM, Dense #type:ignore
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 
-# Load and clean dataset
 df = pd.read_csv("time_series_data.csv", parse_dates=[0], index_col=0)
 df = df.iloc[1:].apply(pd.to_numeric, errors='coerce').dropna()
 
-# Normalize data
 scaler = MinMaxScaler()
 data_scaled = scaler.fit_transform(df)
 
-# Create sequences
 def create_sequences(data, time_steps=10):
     X, y = [], []
     for i in range(len(data) - time_steps):
@@ -26,7 +23,6 @@ def create_sequences(data, time_steps=10):
 X, y = create_sequences(data_scaled)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
 
-# Build and train LSTM model
 model = Sequential([
     LSTM(50, activation='relu', return_sequences=True, input_shape=(X.shape[1], X.shape[2])),
     LSTM(50, activation='relu'),
@@ -37,11 +33,18 @@ model.compile(optimizer='adam', loss='mse')
 model.fit(X_train, y_train, epochs=20, batch_size=32, validation_data=(X_test, y_test))
 
 def forecast_next(data, model, steps=10):
-    current_input = data[-steps:].reshape(1, steps, X.shape[2])
-    forecasted = [model.predict(current_input).flatten() for _ in range(steps)]
+    current_input = data[-steps:].copy()
+    forecasted = []
+
+    for _ in range(steps):
+        input_seq = current_input.reshape(1, current_input.shape[0], current_input.shape[1])
+        next_pred = model.predict(input_seq, verbose=0)[0]
+        forecasted.append(next_pred)
+
+        current_input = np.vstack([current_input[1:], next_pred])
+
     forecasted = scaler.inverse_transform(forecasted)
 
-    # Print formatted output
     print("\n📊 Future Predictions 📊")
     print("Day | Close Price | High Price | Low Price  | Open Price  | Volume")
     print("----|-------------|------------|------------|--------------|-----------")
@@ -50,6 +53,4 @@ def forecast_next(data, model, steps=10):
 
     return forecasted
 
-# Call function and store results
 future_forecast = forecast_next(data_scaled, model)
-print(future_forecast)
