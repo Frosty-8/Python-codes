@@ -1,0 +1,24 @@
+Installation and Configuration of virtualization using KVM. 
+
+https://youtu.be/5O7-FQPND6E?feature=shared
+
+Commands step by step -> 
+
+sudo apt update
+
+egrep -c '(vmx|svm)' /proc/cpuinfo
+
+sudo apt install cpu-checker
+
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils -y
+
+sudo systemctl enable libvirtd
+sudo systemctl start libvirtd
+sudo systemctl status libvirtd
+
+sudo systemctl enable --now libvirtd
+
+Creating virtual machine ->>>>
+sudo apt install virt-manager -y
+
+sudo virt-manager
