@@ -1,0 +1,13 @@
+sudo apt update
+
+sudo apt upgrade
+
+sudo apt install docker.io
+
+docker ––version
+
+sudo systemctl enable docker
+
+sudo systemctl start docker
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
