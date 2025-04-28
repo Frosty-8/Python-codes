@@ -1,0 +1,73 @@
+1. Install Virtual Box
+
+--------------------------------------------------------------------------
+2. Google App Engine download -> edit -> preferences -> paths
+run the empty file "app"
+-------------------------------------------------------------------------------
+4. 
+
+def reducer(mapped):
+    word_counts={}
+    for word,value in mapped:
+        if word in word_counts:
+            word_counts[word]=word_counts[word] +value
+        else:
+            word_counts[word]=value
+    return word_counts
+    
+
+def mapper(line):
+    words=line.strip().split()
+    return [(word,1) for word in words]
+
+text_input = """
+MapReduce is a programming model
+MapReduce is used for processing large data sets
+"""
+
+lines=text_input.strip().split('\n')  #spliting by newline
+#print(lines)
+mapped=[]
+for line in lines:
+    mapped.extend(mapper(line))
+
+#print(mapped)
+result=reducer(mapped)
+
+for word,value in result.items():
+    print(f'{word}: {value}')
+
+--------------------------------------------------------------------------------
+5.
+file -> host network manager -> create
+DHCP server -> Enable -> edit IP address -> apply
+Adaptar -> configure adaptar automatically -> apply
+
+Ubuntu: 
+settings -> network ->
+Adapter 1 : disable
+Adapter 2: enable -> host only 
+
+Kali Linux :
+same as for ubuntu
+
+
+# test -> ping ip address
+-> ip addr show
+------------------------------------------------------------------------------
+6.
+--------------------------------------------------------------------------------
+7. Docker :
+    kubectl config current-context
+    kubectl get noes
+------------------------------------------------------------------------------
+8. Properties -> sharing -> advanced sharing
+permission -> full control -> apply -> ok
+[...............Just to make sure...............]
+settings ->network & internet -> advance network -> advance sharing settings
+-> enable all things given there
+
+in ubuntu :
+files -> other location -> connect to server (smb://192.168.xxx.xxx) -> connect
+
+---------------------------------------------------------------------------
