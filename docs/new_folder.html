@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Folder - Frosty-8-Python-Codes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>New Folder</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ann.html">Ann</a></li>
+            <li><a href="cc.html">CC</a></li>
+            <li><a href="deep_learning.html">Deep Learning</a></li>
+            <li><a href="ml.html">ML</a></li>
+            <li><a href="ml_2.html">ML-2</a></li>
+            <li><a href="nlp.html">NLP</a></li>
+            <li><a href="pra.html">Pra</a></li>
+            <li><a href="pra_2.html">Pra-2</a></li>
+            <li><a href="useless.html">Useless</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>The <strong>New folder</strong> contains a single Python script for matrix manipulation, specifically setting rows and columns to zero if any element in the matrix is zero.</p>
+        </section>
+        <section>
+            <h2>File: code.py</h2>
+            <p><strong>Description:</strong> This script implements an algorithm to set entire rows and columns to zero in a matrix if any element is zero. It uses two sets to track zero-containing rows and columns, achieving O(m*n) time complexity and O(m+n) space complexity.</p>
+            <p><strong>Dependencies:</strong> None</p>
+            <p><strong>Code Snippet:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                def set_zeroes(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    zero_rows = set()
+    zero_cols = set()
+
+    for i in range(rows):
+        for j in range(cols):
+            if matrix[i][j]==0:
+                zero_rows.add(i)
+                zero_cols.add(j)
+
+    for i in range(rows):
+        for j in range(cols):
+            if i in zero_rows or j in zero_cols:
+                matrix[i][j]=0
+    
+    return matrix
+            </pre>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 Frosty-8-Python-Codes Repository</p>
+    </footer>
+    <script>
+        function copyCode(button) {
+            const code = button.parentElement.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
