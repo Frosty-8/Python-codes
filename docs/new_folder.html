@@ -27,13 +27,13 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>New folder</strong> contains a single Python script for matrix manipulation, specifically setting rows and columns to zero if any element in the matrix is zero.</p>
+            <p>The <strong>New folder</strong> contains a script for matrix manipulation.</p>
         </section>
         <section>
             <h2>File: code.py</h2>
-            <p><strong>Description:</strong> This script implements an algorithm to set entire rows and columns to zero in a matrix if any element is zero. It uses two sets to track zero-containing rows and columns, achieving O(m*n) time complexity and O(m+n) space complexity.</p>
+            <p><strong>Description:</strong> Sets entire rows and columns to zero in a matrix if any element is zero.</p>
             <p><strong>Dependencies:</strong> None</p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 def set_zeroes(matrix):
@@ -41,18 +41,15 @@
     cols = len(matrix[0])
     zero_rows = set()
     zero_cols = set()
-
     for i in range(rows):
         for j in range(cols):
-            if matrix[i][j]==0:
+            if matrix[i][j] == 0:
                 zero_rows.add(i)
                 zero_cols.add(j)
-
     for i in range(rows):
         for j in range(cols):
             if i in zero_rows or j in zero_cols:
-                matrix[i][j]=0
-    
+                matrix[i][j] = 0
     return matrix
             </pre>
         </section>
