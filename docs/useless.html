@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useless Folder - Frosty-8-Python-Codes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Useless Folder</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ann.html">Ann</a></li>
+            <li><a href="cc.html">CC</a></li>
+            <li><a href="deep_learning.html">Deep Learning</a></li>
+            <li><a href="ml.html">ML</a></li>
+            <li><a href="ml_2.html">ML-2</a></li>
+            <li><a href="new_folder.html">New Folder</a></li>
+            <li><a href="nlp.html">NLP</a></li>
+            <li><a href="pra.html">Pra</a></li>
+            <li><a href="pra_2.html">Pra-2</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>The <strong>useless</strong> folder contains four miscellaneous Python scripts, primarily for fetching stock data and performing linear regression.</p>
+        </section>
+        <section>
+            <h2>File: linear-code.py</h2>
+            <p><strong>Description:</strong> This script implements linear regression on synthetic data, visualizing the regression line and reporting metrics like MSE and R² score.</p>
+            <p><strong>Dependencies:</strong> <code>numpy</code>, <code>matplotlib</code>, <code>scikit-learn</code></p>
+            <p><strong>Code Snippet:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+np.random.seed(42)
+X = 2 * np.random.rand(100, 1)
+y = 4 + 3 * X + np.random.randn(100, 1)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+            </pre>
+        </section>
+        <section>
+            <h2>Other Files</h2>
+            <ul>
+                <li><strong>1.py:</strong> Empty file, possibly a placeholder.</li>
+                <li><strong>code.py:</strong> Fetches Microsoft stock data using yfinance and saves it to a CSV.</li>
+                <li><strong>data.py:</strong> Similar to code.py, fetches Microsoft stock data for a longer period.</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 Frosty-8-Python-Codes Repository</p>
+    </footer>
+    <script>
+        function copyCode(button) {
+            const code = button.parentElement.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
