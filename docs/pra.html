@@ -27,19 +27,44 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>pra</strong> folder contains scripts for practical machine learning tasks, including decision tree classification and text classification using the 20 Newsgroups dataset.</p>
+            <p>The <strong>pra</strong> folder contains scripts for practical machine learning and text classification tasks.</p>
+        </section>
+        <section>
+            <h2>File: 1st.py</h2>
+            <p><strong>Description:</strong> Decision tree classifier for Iris dataset with visualization.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>matplotlib</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+import matplotlib.pyplot as plt
+from sklearn.tree import plot_tree
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(X_train, y_train)
+plt.figure(figsize=(10, 8))
+plot_tree(dt, feature_names=iris.feature_names, class_names=iris.target_names, filled=True)
+plt.show()
+            </pre>
         </section>
         <section>
             <h2>File: textClassificationModel.py</h2>
-            <p><strong>Description:</strong> This script implements a text classification pipeline using Naive Bayes on the 20 Newsgroups dataset. It supports training, evaluating, and analyzing new statements with a saved model.</p>
+            <p><strong>Description:</strong> Text classification pipeline using Naive Bayes on 20 Newsgroups dataset.</p>
             <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>joblib</code></p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 from sklearn.datasets import fetch_20newsgroups
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
+import joblib
 
 train = fetch_20newsgroups(subset='train', shuffle=True)
 test = fetch_20newsgroups(subset='test', shuffle=True)
@@ -51,15 +76,42 @@ model = Pipeline([
 ])
 
 model.fit(train.data, train.target)
+joblib.dump(model, 'text_classifier.pkl')
             </pre>
         </section>
         <section>
-            <h2>Other Files</h2>
-            <ul>
-                <li><strong>1st.py:</strong> Decision tree classifier for Iris dataset with visualization and rule extraction.</li>
-                <li><strong>.ipynb_checkpoints/2nd-checkpoint.py:</strong> Text classification on 20 Newsgroups with hyperparameter tuning.</li>
-                <li><strong>.ipynb_checkpoints/Untitled-checkpoint.ipynb:</strong> Empty Jupyter notebook checkpoint.</li>
-            </ul>
+            <h2>File: .ipynb_checkpoints/2nd-checkpoint.py</h2>
+            <p><strong>Description:</strong> Text classification on 20 Newsgroups with hyperparameter tuning.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import fetch_20newsgroups
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import GridSearchCV
+
+train = fetch_20newsgroups(subset='train', shuffle=True)
+pipeline = Pipeline([
+    ('vect', CountVectorizer()),
+    ('tfidf', TfidfTransformer()),
+    ('clf', MultinomialNB()),
+])
+parameters = {'clf__alpha': [0.1, 1.0]}
+grid_search = GridSearchCV(pipeline, parameters, cv=5)
+grid_search.fit(train.data, train.target)
+            </pre>
+        </section>
+        <section>
+            <h2>File: .ipynb_checkpoints/Untitled-checkpoint.ipynb</h2>
+            <p><strong>Description:</strong> Empty Jupyter notebook checkpoint.</p>
+            <p><strong>Dependencies:</strong> None</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                # Empty notebook
+                </pre>
         </section>
     </div>
     <footer>
