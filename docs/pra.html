@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pra Folder - Frosty-8-Python-Codes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Pra Folder</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ann.html">Ann</a></li>
+            <li><a href="cc.html">CC</a></li>
+            <li><a href="deep_learning.html">Deep Learning</a></li>
+            <li><a href="ml.html">ML</a></li>
+            <li><a href="ml_2.html">ML-2</a></li>
+            <li><a href="new_folder.html">New Folder</a></li>
+            <li><a href="nlp.html">NLP</a></li>
+            <li><a href="pra_2.html">Pra-2</a></li>
+            <li><a href="useless.html">Useless</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>The <strong>pra</strong> folder contains scripts for practical machine learning tasks, including decision tree classification and text classification using the 20 Newsgroups dataset.</p>
+        </section>
+        <section>
+            <h2>File: textClassificationModel.py</h2>
+            <p><strong>Description:</strong> This script implements a text classification pipeline using Naive Bayes on the 20 Newsgroups dataset. It supports training, evaluating, and analyzing new statements with a saved model.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>joblib</code></p>
+            <p><strong>Code Snippet:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import fetch_20newsgroups
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+
+train = fetch_20newsgroups(subset='train', shuffle=True)
+test = fetch_20newsgroups(subset='test', shuffle=True)
+
+model = Pipeline([
+    ('vect', CountVectorizer()),
+    ('tfidf', TfidfTransformer()),
+    ('clf', MultinomialNB()),
+])
+
+model.fit(train.data, train.target)
+            </pre>
+        </section>
+        <section>
+            <h2>Other Files</h2>
+            <ul>
+                <li><strong>1st.py:</strong> Decision tree classifier for Iris dataset with visualization and rule extraction.</li>
+                <li><strong>.ipynb_checkpoints/2nd-checkpoint.py:</strong> Text classification on 20 Newsgroups with hyperparameter tuning.</li>
+                <li><strong>.ipynb_checkpoints/Untitled-checkpoint.ipynb:</strong> Empty Jupyter notebook checkpoint.</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 Frosty-8-Python-Codes Repository</p>
+    </footer>
+    <script>
+        function copyCode(button) {
+            const code = button.parentElement.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
