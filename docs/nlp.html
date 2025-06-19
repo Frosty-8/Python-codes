@@ -27,31 +27,135 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>NLP</strong> folder contains eight Python scripts for natural language processing tasks using spaCy, focusing on named entity recognition (NER) and text analysis.</p>
+            <p>The <strong>NLP</strong> folder contains scripts for natural language processing tasks using spaCy.</p>
         </section>
         <section>
-            <h2>File: 7th.py</h2>
-            <p><strong>Description:</strong> This script uses spaCy to perform named entity recognition on a sample sentence, identifying entities and their types (e.g., organization, location).</p>
+            <h2>File: 2nd.py</h2>
+            <p><strong>Description:</strong> Tokenizes and lemmatizes text using spaCy.</p>
             <p><strong>Dependencies:</strong> <code>spacy</code> (with model <code>en_core_web_sm</code>)</p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 import spacy
+
 nlp = spacy.load('en_core_web_sm')
-text = 'Apple Inc. is looking at buying U.K. startup for $1 billion'
+text = "The quick brown foxes are running."
 doc = nlp(text)
-print('Named Entities')
-for ent in doc.ents:
-    print(f'{ent.text} ({ent.label_})')
+for token in doc:
+    print(f"{token.text}: {token.lemma_}")
             </pre>
         </section>
         <section>
-            <h2>Other Files</h2>
-            <ul>
-                <li><strong>2nd.py, 3rd.py, 4th.py, 4thalternative.py, 5th.py:</strong> Additional NLP scripts, likely for various text processing tasks (contents not fully specified).</li>
-                <li><strong>6th.py:</strong> Evaluates NER performance by comparing predicted entities to true entities, calculating precision, recall, and F1 score.</li>
-                <li><strong>new.py:</strong> Empty file, possibly a placeholder for future work.</li>
-            </ul>
+            <h2>File: 3rd.py</h2>
+            <p><strong>Description:</strong> Performs part-of-speech tagging on a sample sentence.</p>
+            <p><strong>Dependencies:</strong> <code>spacy</code> (with model <code>en_core_web_sm</code>)</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import spacy
+
+nlp = spacy.load('en_core_web_sm')
+text = "Apple is launching a new product."
+doc = nlp(text)
+for token in doc:
+    print(f"{token.text}: {token.pos_}")
+            </pre>
+        </section>
+        <section>
+            <h2>File: 4th.py</h2>
+            <p><strong>Description:</strong> Extracts named entities from a news article snippet.</p>
+            <p><strong>Dependencies:</strong> <code>spacy</code> (with model <code>en_core_web_sm</code>)</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import spacy
+
+nlp = spacy.load('en_core_web_sm')
+text = "Tesla opened a new factory in Shanghai."
+doc = nlp(text)
+for ent in doc.ents:
+    print(f"{ent.text}: {ent.label_}")
+            </pre>
+        </section>
+        <section>
+            <h2>File: 4thalternative.py</h2>
+            <p><strong>Description:</strong> Alternative NER approach using a different spaCy model.</p>
+            <p><strong>Dependencies:</strong> <code>spacy</code> (with model <code>en_core_web_lg</code>)</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import spacy
+
+nlp = spacy.load('en_core_web_lg')
+text = "Tesla opened a new factory in Shanghai."
+doc = nlp(text)
+for ent in doc.ents:
+    print(f"{ent.text}: {ent.label_}")
+            </pre>
+        </section>
+        <section>
+            <h2>File: 5th.py</h2>
+            <p><strong>Description:</strong> Dependency parsing for sentence structure analysis.</p>
+            <p><strong>Dependencies:</strong> <code>spacy</code> (with model <code>en_core_web_sm</code>)</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import spacy
+
+nlp = spacy.load('en_core_web_sm')
+text = "The cat chased the mouse."
+doc = nlp(text)
+for token in doc:
+    print(f"{token.text}: {token.dep_} -> {token.head.text}")
+            </pre>
+        </section>
+        <section>
+            <h2>File: 6th.py</h2>
+            <p><strong>Description:</strong> Evaluates NER performance by comparing predicted and true entities.</p>
+            <p><strong>Dependencies:</strong> <code>spacy</code> (with model <code>en_core_web_sm</code>)</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import spacy
+from sklearn.metrics import precision_recall_fscore_support
+
+nlp = spacy.load('en_core_web_sm')
+text = "Apple Inc. is based in Cupertino."
+doc = nlp(text)
+predicted = [(ent.text, ent.label_) for ent in doc.ents]
+true = [("Apple Inc.", "ORG"), ("Cupertino", "GPE")]
+y_true = [label for _, label in true]
+y_pred = [label for _, label in predicted]
+precision, recall, f1, _ = precision_recall_fscore_support(y_true, y_pred, average='weighted')
+print(f"Precision: {precision}, Recall: {recall}, F1: {f1}")
+            </pre>
+        </section>
+        <section>
+            <h2>File: 7th.py</h2>
+            <p><strong>Description:</strong> Named entity recognition on a sample sentence.</p>
+            <p><strong>Dependencies:</strong> <code>spacy</code> (with model <code>en_core_web_sm</code>)</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import spacy
+
+nlp = spacy.load('en_core_web_sm')
+text = "Apple Inc. is looking at buying U.K. startup for $1 billion"
+doc = nlp(text)
+print('Named Entities')
+for ent in doc.ents:
+    print(f"{ent.text} ({ent.label_})")
+            </pre>
+        </section>
+        <section>
+            <h2>File: new.py</h2>
+            <p><strong>Description:</strong> Empty file, possibly a placeholder.</p>
+            <p><strong>Dependencies:</strong> None</p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                # Placeholder file
+                </pre>
         </section>
     </div>
     <footer>
