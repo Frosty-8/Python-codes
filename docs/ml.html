@@ -27,25 +27,201 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>ml</strong> folder contains eleven Python scripts implementing various machine learning algorithms, including logistic regression, random forests, neural networks, SVMs, and clustering, primarily using the Iris and Mushroom datasets.</p>
+            <p>The <strong>ml</strong> folder contains scripts implementing various machine learning algorithms using scikit-learn.</p>
+        </section>
+        <section>
+            <h2>File: 6.py</h2>
+            <p><strong>Description:</strong> Logistic regression and random forest for Iris binary classification.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>pandas</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+iris = load_iris()
+X = iris.data[iris.target != 2]  # Binary classification
+y = iris.target[iris.target != 2]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp10.py</h2>
+            <p><strong>Description:</strong> MLP classifier for Iris classification.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+mlp = MLPClassifier(hidden_layer_sizes=(100,), max_iter=500, random_state=42)
+mlp.fit(X_train, y_train)
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp11.py</h2>
+            <p><strong>Description:</strong> Custom neural network for word length classification.</p>
+            <p><strong>Dependencies:</strong> <code>numpy</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import numpy as np
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+X = np.array([[len(word)] for word in ["cat", "dog", "bird", "elephant"]])
+y = np.array([0, 0, 1, 1])  # 0: short, 1: long
+
+weights = np.random.rand(1)
+bias = np.random.rand(1)
+learning_rate = 0.01
+
+for _ in range(1000):
+    z = np.dot(X, weights) + bias
+    pred = sigmoid(z)
+    error = pred - y
+    weights -= learning_rate * np.dot(X.T, error)
+    bias -= learning_rate * error.sum()
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp12.py</h2>
+            <p><strong>Description:</strong> Self-Organizing Map (SOM) for character image clustering.</p>
+            <p><strong>Dependencies:</strong> <code>numpy</code>, <code>minisom</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from minisom import MiniSom
+import numpy as np
+
+data = np.random.rand(100, 10)  # Simulated character image features
+som = MiniSom(10, 10, 10, sigma=0.5, learning_rate=0.5)
+som.random_weights_init(data)
+som.train_random(data, 100)
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp13.py</h2>
+            <p><strong>Description:</strong> SVM with RBF kernel approximation for Iris classification.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+svm = SVC(kernel='rbf', random_state=42)
+svm.fit(X_train, y_train)
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp5.py</h2>
+            <p><strong>Description:</strong> Linear regression for housing price prediction.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>pandas</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import fetch_california_housing
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+
+housing = fetch_california_housing()
+X, y = housing.data, housing.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+lr = LinearRegression()
+lr.fit(X_train, y_train)
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp6.py</h2>
+            <p><strong>Description:</strong> Decision tree classifier for Iris classification.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(X_train, y_train)
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp7.py</h2>
+            <p><strong>Description:</strong> KNN classifier for Iris classification with k-value analysis.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X_train, y_train)
+            </pre>
+        </section>
+        <section>
+            <h2>File: exp8.py</h2>
+            <p><strong>Description:</strong> KMeans clustering for Iris dataset.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.cluster import KMeans
+
+iris = load_iris()
+X = iris.data
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans.fit(X)
+            </pre>
         </section>
         <section>
             <h2>File: exp9.py</h2>
-            <p><strong>Description:</strong> This script implements an SVM classifier on the Mushroom dataset to predict whether a mushroom is edible or poisonous, visualizing the decision boundary.</p>
-            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>matplotlib</code>, <code>pandas</code>, <code>numpy</code></p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Description:</strong> SVM classifier on Mushroom dataset for edible/poisonous classification.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>pandas</code></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 mushroom = pd.read_csv("mushrooms.csv")
 mushroom_df = pd.DataFrame(mushroom)
-
 label_encoders = {}
 for column in mushroom_df.columns:
     le = LabelEncoder()
@@ -54,27 +230,31 @@ for column in mushroom_df.columns:
 
 X = mushroom_df[['cap-shape', 'cap-color']].values
 y = mushroom_df['class'].values
-
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-svm_classifier = SVC(kernel='linear', random_state=42)
-svm_classifier.fit(X_train, y_train)
+svm = SVC(kernel='linear', random_state=42)
+svm.fit(X_train, y_train)
             </pre>
         </section>
         <section>
-            <h2>Other Files</h2>
-            <ul>
-                <li><strong>6.py:</strong> Logistic regression and random forest for Iris binary classification.</li>
-                <li><strong>exp10.py:</strong> MLP classifier for Iris classification.</li>
-                <li><strong>exp11.py:</strong> Custom neural network for word length classification.</li>
-                <li><strong>exp12.py:</strong> Self-Organizing Map (SOM) for character image clustering.</li>
-                <li><strong>exp13.py:</strong> SVM with RBF kernel approximation for Iris classification.</li>
-                <li><strong>exp5.py:</strong> Linear regression for housing price prediction.</li>
-                <li><strong>exp6.py:</strong> Decision tree classifier for Iris classification.</li>
-                <li><strong>exp7.py:</strong> KNN classifier for Iris classification with k-value analysis.</li>
-                <li><strong>exp8.py:</strong> KMeans clustering for Iris dataset.</li>
-                <li><strong>mini.py:</strong> Random forest classifier for Iris classification with visualization.</li>
-            </ul>
+            <h2>File: mini.py</h2>
+            <p><strong>Description:</strong> Random forest classifier for Iris classification with visualization.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>matplotlib</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+import matplotlib.pyplot as plt
+
+iris = load_iris()
+X, y = iris.data, iris.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
+            </pre>
         </section>
     </div>
     <footer>
