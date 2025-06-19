@@ -27,13 +27,96 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>deep learning</strong> folder contains eight Python scripts implementing various deep learning models using TensorFlow and Keras. The tasks range from feedforward neural networks to convolutional neural networks (CNNs) and recurrent neural networks (RNNs) for tasks like classification, digit recognition, and sentiment analysis.</p>
+            <p>The <strong>deep learning</strong> folder contains scripts implementing various deep learning models using TensorFlow and Keras.</p>
+        </section>
+        <section>
+            <h2>File: 1st.py</h2>
+            <p><strong>Description:</strong> Feedforward neural network for binary classification on synthetic data.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code>, <code>numpy</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+
+np.random.seed(42)
+X = np.random.rand(1000, 2)
+y = (X[:, 0] + X[:, 1] > 1).astype(int)
+
+model = Sequential([
+    Dense(16, activation='relu', input_dim=2),
+    Dense(8, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
+
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.fit(X, y, epochs=50, batch_size=32, validation_split=0.2)
+            </pre>
+        </section>
+        <section>
+            <h2>File: 2nd.py</h2>
+            <p><strong>Description:</strong> Deep neural network for Iris dataset classification with dropout layers.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code>, <code>scikit-learn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.utils import to_categorical
+
+iris = load_iris()
+X, y = iris.data, iris.target
+y = to_categorical(y, num_classes=3)
+
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+model = Sequential([
+    Dense(64, activation='relu', input_dim=4),
+    Dropout(0.2),
+    Dense(32, activation='relu'),
+    Dropout(0.2),
+    Dense(3, activation='softmax')
+])
+
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.fit(X, y, epochs=100, batch_size=16, validation_split=0.2)
+            </pre>
+        </section>
+        <section>
+            <h2>File: 3rd.py</h2>
+            <p><strong>Description:</strong> Bidirectional LSTM model for IMDB sentiment analysis.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from tensorflow.keras.datasets import imdb
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, Bidirectional, LSTM, Dense
+
+(X_train, y_train), (X_test, y_test) = imdb.load_data(num_words=10000)
+X_train = pad_sequences(X_train, maxlen=200)
+X_test = pad_sequences(X_test, maxlen=200)
+
+model = Sequential([
+    Embedding(10000, 128, input_length=200),
+    Bidirectional(LSTM(64)),
+    Dense(1, activation='sigmoid')
+])
+
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=5, batch_size=32, validation_data=(X_test, y_test))
+            </pre>
         </section>
         <section>
             <h2>File: 4th.py</h2>
-            <p><strong>Description:</strong> This script builds a CNN for digit recognition using the MNIST dataset. It preprocesses the data, constructs a model with convolutional and pooling layers, and evaluates its performance.</p>
+            <p><strong>Description:</strong> CNN for digit recognition using the MNIST dataset.</p>
             <p><strong>Dependencies:</strong> <code>tensorflow</code>, <code>matplotlib</code></p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 import tensorflow as tf
@@ -43,10 +126,8 @@ from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
-
 x_train = x_train.reshape(-1, 28, 28, 1).astype('float32') / 255.0
 x_test = x_test.reshape(-1, 28, 28, 1).astype('float32') / 255.0
-
 y_train = to_categorical(y_train, num_classes=10)
 y_test = to_categorical(y_test, num_classes=10)
 
@@ -61,22 +142,139 @@ model = Sequential([
     Dense(10, activation='softmax')
 ])
 
-model.compile(optimizer='adam', 
-              loss='categorical_crossentropy', 
-              metrics=['accuracy'])
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.fit(x_train, y_train, epochs=10, batch_size=32, validation_data=(x_test, y_test))
             </pre>
         </section>
         <section>
-            <h2>Other Files</h2>
-            <ul>
-                <li><strong>1st.py:</strong> Feedforward neural network for binary classification on synthetic data.</li>
-                <li><strong>2nd.py:</strong> Deep neural network for Iris dataset classification with dropout layers.</li>
-                <li><strong>3rd.py:</strong> Bidirectional LSTM model for IMDB sentiment analysis.</li>
-                <li><strong>5th.py:</strong> CNN for CIFAR-10 image classification.</li>
-                <li><strong>6th_dl.py:</strong> RNN for sentiment analysis on a custom dataset.</li>
-                <li><strong>7th dl.py:</strong> Transfer learning with VGG16 on Fashion MNIST dataset.</li>
-                <li><strong>8th_dl.py:</strong> LSTM for time series forecasting on stock data.</li>
-            </ul>
+            <h2>File: 5th.py</h2>
+            <p><strong>Description:</strong> CNN for CIFAR-10 image classification.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from tensorflow.keras.datasets import cifar10
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.utils import to_categorical
+
+(X_train, y_train), (X_test, y_test) = cifar10.load_data()
+X_train = X_train.astype('float32') / 255.0
+X_test = X_test.astype('float32') / 255.0
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
+
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)),
+    MaxPooling2D((2, 2)),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D((2, 2)),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dropout(0.5),
+    Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=20, batch_size=64, validation_data=(X_test, y_test))
+            </pre>
+        </section>
+        <section>
+            <h2>File: 6th_dl.py</h2>
+            <p><strong>Description:</strong> RNN for sentiment analysis on a custom dataset.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code>, <code>numpy</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, SimpleRNN, Dense
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+texts = ["great movie", "terrible film", "awesome story", "bad plot"]
+labels = [1, 0, 1, 0]
+tokenizer = Tokenizer(num_words=100)
+tokenizer.fit_on_texts(texts)
+sequences = tokenizer.texts_to_sequences(texts)
+X = pad_sequences(sequences, maxlen=5)
+y = np.array(labels)
+
+model = Sequential([
+    Embedding(100, 32, input_length=5),
+    SimpleRNN(32),
+    Dense(1, activation='sigmoid')
+])
+
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+model.fit(X, y, epochs=10, batch_size=2)
+            </pre>
+        </section>
+        <section>
+            <h2>File: 7th dl.py</h2>
+            <p><strong>Description:</strong> Transfer learning with VGG16 on Fashion MNIST dataset.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from tensorflow.keras.datasets import fashion_mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.applications import VGG16
+from tensorflow.keras.utils import to_categorical
+
+(X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
+X_train = np.stack([X_train]*3, axis=-1).astype('float32') / 255.0
+X_test = np.stack([X_test]*3, axis=-1).astype('float32') / 255.0
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
+
+base_model = VGG16(weights='imagenet', include_top=False, input_shape=(28, 28, 3))
+model = Sequential([
+    base_model,
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=5, batch_size=32, validation_data=(X_test, y_test))
+            </pre>
+        </section>
+        <section>
+            <h2>File: 8th_dl.py</h2>
+            <p><strong>Description:</strong> LSTM for time series forecasting on stock data.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code>, <code>pandas</code>, <code>numpy</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+
+data = pd.read_csv('stock_data.csv')
+prices = data['Close'].values.reshape(-1, 1)
+scaler = MinMaxScaler()
+prices = scaler.fit_transform(prices)
+
+def create_sequences(data, seq_length):
+    X, y = [], []
+    for i in range(len(data) - seq_length):
+        X.append(data[i:i + seq_length])
+        y.append(data[i + seq_length])
+    return np.array(X), np.array(y)
+
+X, y = create_sequences(prices, seq_length=10)
+model = Sequential([
+    LSTM(50, activation='relu', input_shape=(10, 1)),
+    Dense(1)
+])
+
+model.compile(optimizer='adam', loss='mse')
+model.fit(X, y, epochs=50, batch_size=32, validation_split=0.2)
+            </pre>
         </section>
     </div>
     <footer>
