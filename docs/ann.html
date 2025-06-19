@@ -27,21 +27,13 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>Ann</strong> folder contains a script focused on building an Artificial Neural Network (ANN) for stock price prediction using TensorFlow and Keras. The script processes stock market data to predict the next day's opening price and trading volume.</p>
+            <p>The <strong>Ann</strong> folder contains a script focused on building an Artificial Neural Network (ANN) for stock price prediction using TensorFlow and Keras.</p>
         </section>
         <section>
             <h2>File: sss.py</h2>
-            <p><strong>Description:</strong> This script implements a feedforward neural network to predict the next day's opening price and trading volume based on historical stock data. It uses the following steps:</p>
-            <ul>
-                <li>Loads stock data from a CSV file (<code>stocks.csv</code>).</li>
-                <li>Preprocesses data by creating target variables (<code>Next_Open</code>, <code>Next_Volume</code>) and scaling features.</li>
-                <li>Splits data into training and testing sets.</li>
-                <li>Builds a Sequential model with three Dense layers (64, 32, 2 neurons).</li>
-                <li>Trains the model using the Adam optimizer and mean squared error loss.</li>
-                <li>Makes predictions and compares them to actual values.</li>
-            </ul>
+            <p><strong>Description:</strong> Implements a feedforward neural network to predict the next day's opening price and trading volume based on historical stock data.</p>
             <p><strong>Dependencies:</strong> <code>pandas</code>, <code>numpy</code>, <code>scikit-learn</code>, <code>tensorflow</code></p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 import pandas as pd
@@ -52,37 +44,33 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
 data = pd.read_csv('stocks.csv')
-
 data['Next_Open'] = data['Open'].shift(-1)
 data['Next_Volume'] = data['Volume'].shift(-1)
-
 data = data.dropna()
 
-X = data[['Open','High','Low','Close','Volume']].values
-y = data[['Next_Open','Next_Volume']].values
+X = data[['Open', 'High', 'Low', 'Close', 'Volume']].values
+y = data[['Next_Open', 'Next_Volume]].values
 
 scaler_x = MinMaxScaler()
 scaler_y = MinMaxScaler()
-
 X = scaler_x.fit_transform(X)
 y = scaler_y.fit_transform(y)
 
-X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model=Sequential([
-    Dense(64,activation='relu',input_dim=X_train.shape[1]),
-    Dense(32,activation='relu'),
-    Dense(2,activation='linear')
+model = Sequential([
+    Dense(64, activation='relu', input_dim=X_train.shape[1]),
+    Dense(32, activation='relu'),
+    Dense(2, activation='linear')
 ])
 
-model.compile(optimizer='adam',loss='mse',metrics=['mae'])
-
-history = model.fit(X_train,y_train,epochs=50,batch_size=1,validation_split=0,verbose=1)
+model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+history = model.fit(X_train, y_train, epochs=50, batch_size=1, validation_split=0.2, verbose=1)
             </pre>
         </section>
     </div>
     <footer>
-        <p>&copy; 2025 Frosty-8-Python-Codes Repository</p>
+        <p>© 2025 Frosty-8-Python-Codes Repository</p>
     </footer>
     <script>
         function copyCode(button) {
