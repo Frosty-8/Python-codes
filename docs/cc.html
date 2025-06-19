@@ -27,13 +27,13 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>CC</strong> folder contains resources and scripts related to cloud computing, including assignments for setting up virtual environments and a MapReduce implementation. The files cover topics like VirtualBox, KVM, Docker, and Google App Engine.</p>
+            <p>The <strong>CC</strong> folder contains a script related to cloud computing, specifically a MapReduce implementation.</p>
         </section>
         <section>
             <h2>File: mapreduce.py</h2>
-            <p><strong>Description:</strong> This script implements a simple MapReduce algorithm to count word frequencies across multiple documents. It uses the <code>Counter</code> class from the <code>collections</code> module to aggregate word counts.</p>
+            <p><strong>Description:</strong> Implements a simple MapReduce algorithm to count word frequencies across multiple documents.</p>
             <p><strong>Dependencies:</strong> <code>collections</code></p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 from collections import Counter
@@ -48,17 +48,6 @@ word_counts = Counter(words)
 for word, count in sorted(word_counts.items()):
     print(f"{word}: {count}")
             </pre>
-        </section>
-        <section>
-            <h2>Other Files</h2>
-            <ul>
-                <li><strong>alll codes:</strong> Contains instructions for setting up VirtualBox, Google App Engine, and a MapReduce example, along with network configuration steps for Ubuntu and Kali Linux.</li>
-                <li><strong>Assignment 2:</strong> Provides a link to download Google App Engine Python SDK.</li>
-                <li><strong>Assignment 5:</strong> Instructions for implementing network virtualization using VirtualBox, with a YouTube link for guidance.</li>
-                <li><strong>Assignment 6:</strong> Steps for installing and configuring KVM virtualization, including commands for package installation and virtual machine creation.</li>
-                <li><strong>Assignment 7:</strong> Commands for installing and enabling Docker on a Linux system.</li>
-                <li><strong>Assignment 8:</strong> A YouTube link for additional cloud computing resources.</li>
-            </ul>
         </section>
     </div>
     <footer>
