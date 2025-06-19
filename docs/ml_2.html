@@ -27,13 +27,13 @@
     <div class="container">
         <section>
             <h2>Overview</h2>
-            <p>The <strong>ml-2</strong> folder contains two Python scripts for machine learning tasks, focusing on exploratory data analysis (EDA) and classification using the Iris dataset.</p>
+            <p>The <strong>ml-2</strong> folder contains scripts for machine learning tasks, focusing on exploratory data analysis and classification.</p>
         </section>
         <section>
             <h2>File: 5.py</h2>
-            <p><strong>Description:</strong> This script performs EDA on the Iris dataset, including handling missing values, generating pairplots, correlation heatmaps, and a detailed profiling report.</p>
+            <p><strong>Description:</strong> Performs EDA on the Iris dataset, generating pairplots and profiling reports.</p>
             <p><strong>Dependencies:</strong> <code>pandas</code>, <code>seaborn</code>, <code>matplotlib</code>, <code>ydata_profiling</code></p>
-            <p><strong>Code Snippet:</strong></p>
+            <p><strong>Code:</strong></p>
             <pre>
                 <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 import pandas as pd
@@ -42,24 +42,40 @@ import matplotlib.pyplot as plt
 from ydata_profiling import ProfileReport
 
 data = sns.load_dataset('iris')
-
 print("Missing Values:\n", data.isnull().sum())
-
 numeric_cols = data.select_dtypes(include='number').columns
 data[numeric_cols] = data[numeric_cols].fillna(data[numeric_cols].mean())
-
 sns.pairplot(data, hue='species', markers=["o", "s", "D"])
 plt.show()
-
 profile = ProfileReport(data, title="Iris Dataset EDA Report", explorative=True)
 profile.to_file("Iris_EDA_Report.html")
             </pre>
         </section>
         <section>
-            <h2>Other Files</h2>
-            <ul>
-                <li><strong>6.py:</strong> Logistic regression and random forest classifiers for binary classification on the Iris dataset, with confusion matrices and precision-recall curves.</li>
-            </ul>
+            <h2>File: 6.py</h2>
+            <p><strong>Description:</strong> Logistic regression and random forest classifiers for binary classification on Iris dataset.</p>
+            <p><strong>Dependencies:</strong> <code>scikit-learn</code>, <code>matplotlib</code>, <code>seaborn</code></p>
+            <p><strong>Code:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris = load_iris()
+X = iris.data[iris.target != 2]
+y = iris.target[iris.target != 2]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X_train, y_train)
+            </pre>
         </section>
     </div>
     <footer>
