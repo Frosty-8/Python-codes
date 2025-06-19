@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML-2 Folder - Frosty-8-Python-Codes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>ML-2 Folder</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ann.html">Ann</a></li>
+            <li><a href="cc.html">CC</a></li>
+            <li><a href="deep_learning.html">Deep Learning</a></li>
+            <li><a href="ml.html">ML</a></li>
+            <li><a href="new_folder.html">New Folder</a></li>
+            <li><a href="nlp.html">NLP</a></li>
+            <li><a href="pra.html">Pra</a></li>
+            <li><a href="pra_2.html">Pra-2</a></li>
+            <li><a href="useless.html">Useless</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>The <strong>ml-2</strong> folder contains two Python scripts for machine learning tasks, focusing on exploratory data analysis (EDA) and classification using the Iris dataset.</p>
+        </section>
+        <section>
+            <h2>File: 5.py</h2>
+            <p><strong>Description:</strong> This script performs EDA on the Iris dataset, including handling missing values, generating pairplots, correlation heatmaps, and a detailed profiling report.</p>
+            <p><strong>Dependencies:</strong> <code>pandas</code>, <code>seaborn</code>, <code>matplotlib</code>, <code>ydata_profiling</code></p>
+            <p><strong>Code Snippet:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from ydata_profiling import ProfileReport
+
+data = sns.load_dataset('iris')
+
+print("Missing Values:\n", data.isnull().sum())
+
+numeric_cols = data.select_dtypes(include='number').columns
+data[numeric_cols] = data[numeric_cols].fillna(data[numeric_cols].mean())
+
+sns.pairplot(data, hue='species', markers=["o", "s", "D"])
+plt.show()
+
+profile = ProfileReport(data, title="Iris Dataset EDA Report", explorative=True)
+profile.to_file("Iris_EDA_Report.html")
+            </pre>
+        </section>
+        <section>
+            <h2>Other Files</h2>
+            <ul>
+                <li><strong>6.py:</strong> Logistic regression and random forest classifiers for binary classification on the Iris dataset, with confusion matrices and precision-recall curves.</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 Frosty-8-Python-Codes Repository</p>
+    </footer>
+    <script>
+        function copyCode(button) {
+            const code = button.parentElement.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
