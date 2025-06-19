@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pra-2 Folder - Frosty-8-Python-Codes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Pra-2 Folder</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ann.html">Ann</a></li>
+            <li><a href="cc.html">CC</a></li>
+            <li><a href="deep_learning.html">Deep Learning</a></li>
+            <li><a href="ml.html">ML</a></li>
+            <li><a href="ml_2.html">ML-2</a></li>
+            <li><a href="new_folder.html">New Folder</a></li>
+            <li><a href="nlp.html">NLP</a></li>
+            <li><a href="pra.html">Pra</a></li>
+            <li><a href="useless.html">Useless</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>The <strong>Pra-2</strong> folder contains thirteen scripts and notebooks for advanced machine learning and data analysis tasks, covering classification, anomaly detection, clustering, and sequence modeling.</p>
+        </section>
+        <section>
+            <h2>File: shape_classifier.py</h2>
+            <p><strong>Description:</strong> This script generates synthetic images of circles, squares, and triangles, adds noise, and uses a KNN classifier to classify them.</p>
+            <p><strong>Dependencies:</strong> <code>numpy</code>, <code>opencv-python</code>, <code>scikit-learn</code>, <code>matplotlib</code></p>
+            <p><strong>Code Snippet:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import numpy as np
+import cv2
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+def generate_shape(shape, size=32):
+    img = np.zeros((size, size), dtype=np.uint8)
+    if shape == "circle":
+        cv2.circle(img, (16,16), 10, 255, -1)
+    elif shape == "square":
+        cv2.rectangle(img, (8,8), (24,24), 255, -1)
+    elif shape == "triangle":
+        pts = np.array([[16,4],[4,28],[28,28]], np.int32)
+        cv2.drawContours(img, [pts], 0, 255, -1)
+    return img
+
+def create_dataset(n=100):
+    X, y, shapes = [], [], ["circle", "square", "triangle"]
+    for idx, shape in enumerate(shapes):
+        for _ in range(n):
+            img = generate_shape(shape)
+            noise = np.random.normal(0, 10, img.shape).astype(np.uint8)
+            noisy_img = cv2.add(img, noise)
+            X.append(noisy_img.flatten())
+            y.append(idx)
+    return np.array(X), np.array(y), shapes
+            </pre>
+        </section>
+        <section>
+            <h2>Other Files</h2>
+            <ul>
+                <li><strong>1.ipynb, 1.py:</strong> Decision tree classifier for Iris dataset.</li>
+                <li><strong>anomaly_detection.py:</strong> Isolation Forest for anomaly detection on KDD Cup dataset.</li>
+                <li><strong>dna_seq.py:</strong> HMM for DNA sequence state prediction.</li>
+                <li><strong>gmm_digits.py:</strong> Gaussian Mixture Model for digit clustering.</li>
+                <li><strong>iris_classification.py:</strong> Random forest classifier for Iris dataset with PCA visualization.</li>
+                <li><strong>knn_iris.py:</strong> KNN classifier for Iris dataset with k-value optimization.</li>
+                <li><strong>mnist_clssification.py:</strong> Gaussian Naive Bayes for MNIST digit classification.</li>
+                <li><strong>test.py:</strong> Empty file, possibly a placeholder.</li>
+                <li><strong>textClassificationModel.py:</strong> Text classification pipeline for 20 Newsgroups dataset.</li>
+                <li><strong>weather_hmm.py:</strong> HMM for weather state prediction.</li>
+                <li><strong>wine_quality_analysis.py:</strong> Statistical analysis of synthetic wine data.</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 Frosty-8-Python-Codes Repository</p>
+    </footer>
+    <script>
+        function copyCode(button) {
+            const code = button.parentElement.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
