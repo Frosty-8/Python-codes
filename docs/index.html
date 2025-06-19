@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frosty-8-Python-Codes Repository</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Frosty-8-Python-Codes Repository</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="ann.html">Ann</a></li>
+            <li><a href="cc.html">CC</a></li>
+            <li><a href="deep_learning.html">Deep Learning</a></li>
+            <li><a href="ml.html">ML</a></li>
+            <li><a href="ml_2.html">ML-2</a></li>
+            <li><a href="new_folder.html">New Folder</a></li>
+            <li><a href="nlp.html">NLP</a></li>
+            <li><a href="pra.html">Pra</a></li>
+            <li><a href="pra_2.html">Pra-2</a></li>
+            <li><a href="useless.html">Useless</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>The <strong>frosty-8-python-codes</strong> repository contains a collection of Python scripts organized into various folders, each focusing on different domains of computer science and data science. The repository includes code for machine learning, deep learning, natural language processing, cloud computing, and more. Below is a summary of the folders and their contents:</p>
+            <table>
+                <tr>
+                    <th>Folder</th>
+                    <th>Description</th>
+                    <th>Key Files</th>
+                </tr>
+                <tr>
+                    <td>Ann</td>
+                    <td>Artificial Neural Networks for stock price prediction</td>
+                    <td>sss.py</td>
+                </tr>
+                <tr>
+                    <td>CC</td>
+                    <td>Cloud Computing assignments and MapReduce implementations</td>
+                    <td>alll codes, mapreduce.py, Assignment 2, 5, 6, 7, 8</td>
+                </tr>
+                <tr>
+                    <td>deep learning</td>
+                    <td>Deep learning models using TensorFlow/Keras</td>
+                    <td>1st.py, 2nd.py, 3rd.py, 4th.py, 5th.py, 6th_dl.py, 7th dl.py, 8th_dl.py</td>
+                </tr>
+                <tr>
+                    <td>ml</td>
+                    <td>Machine learning experiments with various algorithms</td>
+                    <td>6.py, exp10.py, exp11.py, exp12.py, exp13.py, exp5.py, exp6.py, exp7.py, exp8.py, exp9.py, mini.py</td>
+                </tr>
+                <tr>
+                    <td>ml-2</td>
+                    <td>Additional machine learning experiments</td>
+                    <td>5.py, 6.py</td>
+                </tr>
+                <tr>
+                    <td>New folder</td>
+                    <td>Matrix manipulation algorithm</td>
+                    <td>code.py</td>
+                </tr>
+                <tr>
+                    <td>NLP</td>
+                    <td>Natural Language Processing tasks using spaCy</td>
+                    <td>2nd.py, 3rd.py, 4th.py, 4thalternative.py, 5th.py, 6th.py, 7th.py, new.py</td>
+                </tr>
+                <tr>
+                    <td>pra</td>
+                    <td>Practical machine learning and text classification</td>
+                    <td>1st.py, textClassificationModel.py, .ipynb_checkpoints/</td>
+                </tr>
+                <tr>
+                    <td>Pra-2</td>
+                    <td>Advanced practical experiments in ML and data analysis</td>
+                    <td>1.ipynb, 1.py, anomaly_detection.py, dna_seq.py, gmm_digits.py, iris_classification.py, knn_iris.py, mnist_clssification.py, shape_classifier.py, test.py, textClassificationModel.py, weather_hmm.py, wine_quality_analysis.py</td>
+                </tr>
+                <tr>
+                    <td>useless</td>
+                    <td>Miscellaneous scripts for data fetching and linear regression</td>
+                    <td>1.py, code.py, data.py, linear-code.py</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h2>Getting Started</h2>
+            <p>To explore the code, navigate to the folder-specific pages using the navigation bar above. Each page provides detailed information about the files, their purposes, and code snippets with copy functionality.</p>
+            <p>Most scripts require Python libraries such as <code>scikit-learn</code>, <code>tensorflow</code>, <code>pandas</code>, <code>numpy</code>, and <code>matplotlib</code>. Ensure you have these installed using:</p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                pip install scikit-learn tensorflow pandas numpy matplotlib
+            </pre>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2025 Frosty-8-Python-Codes Repository</p>
+    </footer>
+    <script>
+        function copyCode(button) {
+            const code = button.parentElement.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
