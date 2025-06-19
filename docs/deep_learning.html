@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning Folder - Frosty-8-Python-Codes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Deep Learning Folder</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ann.html">Ann</a></li>
+            <li><a href="cc.html">CC</a></li>
+            <li><a href="ml.html">ML</a></li>
+            <li><a href="ml_2.html">ML-2</a></li>
+            <li><a href="new_folder.html">New Folder</a></li>
+            <li><a href="nlp.html">NLP</a></li>
+            <li><a href="pra.html">Pra</a></li>
+            <li><a href="pra_2.html">Pra-2</a></li>
+            <li><a href="useless.html">Useless</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Overview</h2>
+            <p>The <strong>deep learning</strong> folder contains eight Python scripts implementing various deep learning models using TensorFlow and Keras. The tasks range from feedforward neural networks to convolutional neural networks (CNNs) and recurrent neural networks (RNNs) for tasks like classification, digit recognition, and sentiment analysis.</p>
+        </section>
+        <section>
+            <h2>File: 4th.py</h2>
+            <p><strong>Description:</strong> This script builds a CNN for digit recognition using the MNIST dataset. It preprocesses the data, constructs a model with convolutional and pooling layers, and evaluates its performance.</p>
+            <p><strong>Dependencies:</strong> <code>tensorflow</code>, <code>matplotlib</code></p>
+            <p><strong>Code Snippet:</strong></p>
+            <pre>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+x_train = x_train.reshape(-1, 28, 28, 1).astype('float32') / 255.0
+x_test = x_test.reshape(-1, 28, 28, 1).astype('float32') / 255.0
+
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
+
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu', input_shape=(28, 28, 1)),
+    MaxPooling2D((2, 2)),
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D((2, 2)),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dropout(0.5),
+    Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam', 
+              loss='categorical_crossentropy', 
+              metrics=['accuracy'])
+            </pre>
+        </section>
+        <section>
+            <h2>Other Files</h2>
+            <ul>
+                <li><strong>1st.py:</strong> Feedforward neural network for binary classification on synthetic data.</li>
+                <li><strong>2nd.py:</strong> Deep neural network for Iris dataset classification with dropout layers.</li>
+                <li><strong>3rd.py:</strong> Bidirectional LSTM model for IMDB sentiment analysis.</li>
+                <li><strong>5th.py:</strong> CNN for CIFAR-10 image classification.</li>
+                <li><strong>6th_dl.py:</strong> RNN for sentiment analysis on a custom dataset.</li>
+                <li><strong>7th dl.py:</strong> Transfer learning with VGG16 on Fashion MNIST dataset.</li>
+                <li><strong>8th_dl.py:</strong> LSTM for time series forecasting on stock data.</li>
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 Frosty-8-Python-Codes Repository</p>
+    </footer>
+    <script>
+        function copyCode(button) {
+            const code = button.parentElement.textContent.replace('Copy', '').trim();
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => button.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
