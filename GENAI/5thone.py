@@ -1,5 +1,4 @@
 import tensorflow as tf
-import tensorflow_addons as tfa
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -24,27 +23,16 @@ def get_model():
     return tf.keras.Model(inputs, outputs)
 
 model = get_model()
-
-# Load pretrained weights here
-# For this example, we skip this as no real pretrained weights are available in this snippet
-# model.load_weights('path_to_pretrained_weights')
-
-# Sampling function for inference: Reverse diffusion process
 def sample(model, shape=(28, 28, 1), timesteps=TIMESTEPS):
     x = tf.random.normal((1, *shape))  # Start from random noise
 
     for t in reversed(range(timesteps)):
-        t_tensor = tf.fill([1], t)
-        # Predict noise residual with model
         predicted_noise = model(x, training=False)
 
         alpha_t = alphas[t]
         alpha_cumprod_t = alphas_cumprod[t]
         beta_t = betas[t]
 
-        # Equation from DDPM sampling paper:
-        # x_{t-1} = 1/sqrt(alpha_t) * (x_t - ((1-alpha_t)/sqrt(1 - alpha_cumprod_t)) * predicted_noise) + sigma_t * z
-        # For simplicity, ignore sigma_t * z noise for final step (set to 0 for deterministic sampling)
         coef1 = 1 / tf.sqrt(alpha_t)
         coef2 = (1 - alpha_t) / tf.sqrt(1 - alpha_cumprod_t)
 
@@ -69,7 +57,3 @@ def run_pipeline():
 
 if __name__ == "__main__":
     run_pipeline()
-
-
-# In Google Colab, first install tensorflow-addons (for image augmentations etc.)
-#!pip install tensorflow-addons
